@@ -6,7 +6,7 @@ const axios = require('axios');
 const redis = require('redis');
 const client = redis.createClient();
 
-const getUserRepos = (req, res) => {
+const getUserData = (req, res) => {
     let username = req.query.username;
     axios.get(`https://api.github.com/users/${username}`)
     .then(response => {
@@ -46,7 +46,7 @@ function cache(req, res, next) {
     });
 }
 
-app.get('/users', cache, getUserRepos);
+app.get('/users', cache, getUserData);
 
 app.listen(3000, function () {
     console.log('App running on port 3000!')
